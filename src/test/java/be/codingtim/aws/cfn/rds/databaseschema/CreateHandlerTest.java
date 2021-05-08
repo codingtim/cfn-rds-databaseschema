@@ -35,13 +35,13 @@ public class CreateHandlerTest {
     }
 
     public final String secret = "{\n" +
-            "  \"password\": \"databasepassword\",\n" +
+            "  \"password\": \"rootpassword\",\n" +
             "  \"dbname\": \"postgres\",\n" +
             "  \"engine\": \"postgres\",\n" +
             "  \"port\": 5432,\n" +
             "  \"dbInstanceIdentifier\": \"rds-db\",\n" +
-            "  \"host\": \"databasehost\",\n" +
-            "  \"username\": \"root\"\n" +
+            "  \"host\": \"localhost\",\n" +
+            "  \"username\": \"postgres\"\n" +
             "}";
 
     @Test
@@ -49,13 +49,13 @@ public class CreateHandlerTest {
     public void handleRequest_SimpleSuccess() {
         final CreateHandler handler = new CreateHandler();
 
-        final ResourceModel model = ResourceModel.builder().build();
+        final ResourceModel model = ResourceModel.builder().schemaName("unittest").build();
 
         final ResourceHandlerRequest<ResourceModel> request = ResourceHandlerRequest.<ResourceModel>builder()
             .desiredResourceState(model)
             .build();
 
-        when(proxy.injectCredentialsAndInvoke(any(), any(Function.class))).thenReturn(new GetSecretValueResult());
+        when(proxy.injectCredentialsAndInvoke(any(), any(Function.class))).thenReturn(new GetSecretValueResult().withSecretString(secret));
 
         final ProgressEvent<ResourceModel, CallbackContext> response
             = handler.handleRequest(proxy, request, null, logger);

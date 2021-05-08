@@ -7,10 +7,12 @@ Cloudformation custom resource type to create a schema for a PostgreSQL database
 3. `cfn generate` to generate the resource model
 4. implement handlers
 5. write unit tests
-6. `mvn package`
+6. start docker postgres `sudo docker run --name rds-postgres -e POSTGRES_PASSWORD=rootpassword -p 5432:5432 -d postgres` 
+   then run `mvn package`, 
+   after build `psql -h localhost -d unittest -U unittest` with password `replace_me_later` should be able to log in
 7. `cfn submit --set-default`
-8. create stack with `rds.json`, connect to DB with `psql -h $host -d postgres -U root`
-9. create stack with `test-stack.json`
+8. create RDS postgreSQL instance with stack `rds.json`, connect to DB with `psql -h $host -d postgres -U root`
+9. create RDS schema with stack `rds-schema.json`
 
 ## resources
 
