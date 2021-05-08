@@ -1,5 +1,6 @@
 package be.codingtim.aws.cfn.rds.databaseschema;
 
+import com.amazonaws.services.secretsmanager.model.GetSecretValueResult;
 import software.amazon.cloudformation.proxy.AmazonWebServicesClientProxy;
 import software.amazon.cloudformation.proxy.Logger;
 import software.amazon.cloudformation.proxy.OperationStatus;
@@ -11,8 +12,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.function.Function;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class CreateHandlerTest {
@@ -30,6 +35,7 @@ public class CreateHandlerTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void handleRequest_SimpleSuccess() {
         final CreateHandler handler = new CreateHandler();
 
@@ -38,6 +44,8 @@ public class CreateHandlerTest {
         final ResourceHandlerRequest<ResourceModel> request = ResourceHandlerRequest.<ResourceModel>builder()
             .desiredResourceState(model)
             .build();
+
+        when(proxy.injectCredentialsAndInvoke(any(), any(Function.class))).thenReturn(new GetSecretValueResult());
 
         final ProgressEvent<ResourceModel, CallbackContext> response
             = handler.handleRequest(proxy, request, null, logger);

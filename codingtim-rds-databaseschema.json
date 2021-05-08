@@ -32,27 +32,29 @@
     "handlers": {
         "create": {
             "permissions": [
-                "initech:CreateReport"
+                "kms:Decrypt",
+                "secretsmanager:DescribeSecret",
+                "secretsmanager:GetSecretValue"
             ]
         },
         "read": {
             "permissions": [
-                "initech:DescribeReport"
+                "secretsmanager:DescribeSecret"
             ]
         },
         "update": {
             "permissions": [
-                "initech:UpdateReport"
+                "secretsmanager:DescribeSecret"
             ]
         },
         "delete": {
             "permissions": [
-                "initech:DeleteReport"
+                "secretsmanager:DescribeSecret"
             ]
         },
         "list": {
             "permissions": [
-                "initech:ListReports"
+                "secretsmanager:DescribeSecret"
             ]
         }
     }
