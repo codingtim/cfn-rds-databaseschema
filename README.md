@@ -1,12 +1,18 @@
 # codingtim::rds::databaseschema
 
-Congratulations on starting development! Next steps:
+Cloudformation custom resource type to create a schema for a PostgreSQL database. 
 
 1. Write the JSON schema describing your resource, `codingtim-rds-databaseschema.json`
-1. Implement your resource handlers.
+2. `cfn valdiate` to validate the schema
+3. `cfn generate` to generate the resource model
+4. implement handlers
+5. write unit tests
+6. `mvn package`
+7. `cfn submit --set-default`
+8. create stack with `test-stack.json`
 
-The RPDK will automatically generate the correct resource model from the schema whenever the project is built via Maven. You can also do this manually with the following command: `cfn generate`.
+## resources
 
-> Please don't modify files under `target/generated-sources/rpdk`, as they will be automatically overwritten.
-
-The code uses [Lombok](https://projectlombok.org/), and [you may have to install IDE integrations](https://projectlombok.org/setup/overview) to enable auto-complete for Lombok-annotated classes.
+https://onecloudplease.com/blog/aws-cloudformation-custom-resource-types-a-walkthrough
+https://www.cloudar.be/awsblog/writing-an-aws-cloudformation-resource-provider-in-python-step-by-step/
+https://docs.amazonaws.cn/cloudformation-cli/latest/userguide/resource-type-walkthrough.html

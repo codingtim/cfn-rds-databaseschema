@@ -1,10 +1,8 @@
 package be.codingtim.aws.cfn.rds.databaseschema;
 
-import software.amazon.cloudformation.proxy.AmazonWebServicesClientProxy;
-import software.amazon.cloudformation.proxy.Logger;
-import software.amazon.cloudformation.proxy.ProgressEvent;
-import software.amazon.cloudformation.proxy.OperationStatus;
-import software.amazon.cloudformation.proxy.ResourceHandlerRequest;
+import software.amazon.cloudformation.proxy.*;
+
+import java.util.UUID;
 
 public class CreateHandler extends BaseHandler<CallbackContext> {
 
@@ -17,7 +15,8 @@ public class CreateHandler extends BaseHandler<CallbackContext> {
 
         final ResourceModel model = request.getDesiredResourceState();
 
-        // TODO : put your code here
+        String s = UUID.randomUUID().toString();
+        model.setSchemaId(s);
 
         return ProgressEvent.<ResourceModel, CallbackContext>builder()
             .resourceModel(model)
