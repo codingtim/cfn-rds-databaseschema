@@ -34,6 +34,16 @@ public class CreateHandlerTest {
         logger = mock(Logger.class);
     }
 
+    public final String secret = "{\n" +
+            "  \"password\": \"databasepassword\",\n" +
+            "  \"dbname\": \"postgres\",\n" +
+            "  \"engine\": \"postgres\",\n" +
+            "  \"port\": 5432,\n" +
+            "  \"dbInstanceIdentifier\": \"rds-db\",\n" +
+            "  \"host\": \"databasehost\",\n" +
+            "  \"username\": \"root\"\n" +
+            "}";
+
     @Test
     @SuppressWarnings("unchecked")
     public void handleRequest_SimpleSuccess() {
